@@ -7,10 +7,11 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-class Earthquake extends Alert{
+public class Earthquake extends Alert{
 
     private double magnitude;
     private double depth;
     private String coordinates;
+    private String title;
 
 }
