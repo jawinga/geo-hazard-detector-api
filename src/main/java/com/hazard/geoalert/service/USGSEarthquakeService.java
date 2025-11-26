@@ -22,7 +22,7 @@ public class USGSEarthquakeService {
     @Autowired
     EarthquakeAdapter earthquakeAdapter;
 
-    public List<Earthquake>fetchEarthquakes(String startDate){
+    public List<Earthquake>fetchEarthquakes(){
 
         List<Earthquake> earthquakes = new ArrayList<>();
 

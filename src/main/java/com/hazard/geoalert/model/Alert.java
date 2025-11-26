@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 abstract class Alert {
-    private int id;
+    private String id;
     private String type;
     private int severity;
     private LocalDateTime time;

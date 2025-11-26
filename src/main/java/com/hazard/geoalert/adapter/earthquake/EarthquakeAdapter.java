@@ -5,13 +5,15 @@ import com.hazard.geoalert.model.Earthquake;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.LocalDateTime;
+import org.springframework.stereotype.Component;
 
+@Component
 public class EarthquakeAdapter {
 
     public Earthquake transformAlert(USGSFeature features){
 
         Earthquake alert = new Earthquake();
-        alert.setId(Integer.parseInt(features.getId()));
+        alert.setId(features.getId());
         alert.setSeverity(calculateSeverity(features.getProperties().getMag()));
         alert.setTitle(features.getProperties().getTitle());
         alert.setType("earthquake");
