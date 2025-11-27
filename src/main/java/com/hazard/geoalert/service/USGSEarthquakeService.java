@@ -11,6 +11,7 @@ import com.hazard.geoalert.dto.usgs.USGSResponse;
 import com.hazard.geoalert.model.Earthquake;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,6 +22,8 @@ public class USGSEarthquakeService {
     RestTemplate restTemplate;
     @Autowired
     EarthquakeAdapter earthquakeAdapter;
+    @Autowired
+    private KafkaTemplate<String, Earthquake> kafkaTemplate;
 
     public List<Earthquake>fetchEarthquakes(){
 
@@ -39,6 +42,7 @@ public class USGSEarthquakeService {
 
         for (USGSFeature x :USGSbody.getFeatures()) {
             Earthquake earthquake = earthquakeAdapter.transformAlert(x);
+            kafkaTemplate.send("geohazard-earthquakes", earthquake.getId(), earthquake);
             earthquakes.add(earthquake);
         }
 
